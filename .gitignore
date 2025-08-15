@@ -1,0 +1,11 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+Build/
+packages/
+Debug/
+.sonarqube/
+sonar*.*
+.idea

@@ -1,0 +1,35 @@
+===============================================
+To create certs run this from a Powershell prompt:
+
+docker run --rm -v "${PWD}\certs:/work" alpine/openssl req -x509 -newkey rsa:4096 -sha256 -days 36500 -nodes -keyout /work/tls.key -out /work/tls.crt -subj "/CN=mail.sampledomain.com" -addext "subjectAltName=DNS:mail.sampledomain.com,DNS:sampledomain.com"
+===============================================
+To enable telnet on Windows run this from an elevated Powershell prompt:
+
+dism /online /Enable-Feature /FeatureName:TelnetClient
+===============================================
+To send sample email using telnet run:
+
+telnet localhost 25
+
+then send the following:
+
+EHLO test
+MAIL FROM:<sender@example.com>
+RCPT TO:<anything@sampledomain.com>
+DATA
+Subject: hello
+
+test
+.
+QUIT
+===============================================
+To send sample email using Powershell run:
+
+Send-MailMessage `
+  -From "sender@example.com" `
+  -To "qa123@sampledomain.com" `
+  -Subject "Hello from PowerShell" `
+  -Body "This is a test message" `
+  -SmtpServer "localhost" `
+  -Port 25
+===============================================

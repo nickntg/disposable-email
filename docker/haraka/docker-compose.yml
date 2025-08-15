@@ -1,0 +1,21 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  haraka:
+    build: .
+    container_name: haraka
+    restart: unless-stopped
+    ports:
+      - "25:25"
+    environment:
+      WEBHOOK_URL: "http://your-api.internal/mail/received"
+      WEBHOOK_DEBUG: "false"
+    volumes:
+      - ./config:/config:ro
+      - ./plugins:/plugins:ro
+      - ./certs:/certs:ro
+    logging: *default-logging
