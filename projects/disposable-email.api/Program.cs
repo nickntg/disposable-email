@@ -1,3 +1,5 @@
+using disposable_email.api.Services;
+using disposable_email.api.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +12,8 @@ namespace disposable_email.api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddSingleton<IMailStorage, InMemoryMailStorage>();
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();

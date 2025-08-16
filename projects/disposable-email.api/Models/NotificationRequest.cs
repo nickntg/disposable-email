@@ -9,6 +9,7 @@ namespace disposable_email.api.Models
 {
     public class NotificationRequest
     {
+        public string Id { get; set; }
         [JsonPropertyName("envelope")]
         public Envelope Envelope { get; set; }
         [JsonPropertyName("headers")]
@@ -16,7 +17,7 @@ namespace disposable_email.api.Models
         [JsonPropertyName("raw_b64")]
         public string RawBase64 { get; set; }
 
-        public async Task<ParsedEmail> Decode()
+        public async Task<ParsedEmail> DecodeAsync()
         {
             byte[] raw = Convert.FromBase64String(RawBase64);
 
